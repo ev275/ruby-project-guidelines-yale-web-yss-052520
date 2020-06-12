@@ -18,16 +18,30 @@ def start
     welcome_section
 end
 
+# def welcome_section
+#     @user_type = @prompt.select("Hello, which of these are you?", %w(returning_user new_user))
+#     log_in_section
+# end
+
 def welcome_section
-    @user_type = @prompt.select("Hello, which of these are you?", %w(returning_user new_user))
+    @user_type = @prompt.select("Hello, which of these are you?", ["Returning User", "New User"])
     log_in_section
 end
 
+# def log_in_section
+#     if @user_type == "returning_user"
+#         returning_user_log_in
+
+#     elsif @user_type == "new_user"
+#         new_user_sign_up_info
+#     end
+# end
+
 def log_in_section
-    if @user_type == "returning_user"
+    if @user_type == "Returning User"
         returning_user_log_in
 
-    elsif @user_type == "new_user"
+    elsif @user_type == "New User"
         new_user_sign_up_info
     end
 end
@@ -101,55 +115,112 @@ def new_password
     end
 end
 
-def menu
-    @menu_choice = @prompt.select("What would you like to do today?", %w(
-        view_priority_to_dos
-        view_all_to_dos
-        new_to_do
-        old_to_dos
-        teams
-        log_out
-    ))
+# def menu
+#     @menu_choice = @prompt.select("What would you like to do today?", %w(
+#         view_priority_to_dos
+#         view_all_to_dos
+#         new_to_do
+#         old_to_dos
+#         teams
+#         log_out
+#     ))
 
-    if @menu_choice == "view_priority_to_dos"
+#     if @menu_choice == "view_priority_to_dos"
+#         view_priority_to_dos    
+#     elsif @menu_choice == "view_all_to_dos"
+#         view_all_to_dos 
+#     elsif @menu_choice == "new_to_do"
+#         new_to_do
+#     elsif @menu_choice == "old_to_dos"
+#         old_to_dos
+#     elsif @menu_choice == "teams"
+#         teams
+#     elsif @menu_choice == "log_out"
+#         welcome_section
+#     end
+# end
+
+def menu
+    @menu_choice = @prompt.select("What would you like to do today?", [
+        "View priority To-Do's",
+        "View all To-Do's",
+        "Make a new To-Do",
+        "View old To-Do's",
+        "Teams",
+        "Log Out"
+    ])
+
+
+    if @menu_choice == "View priority To-Do's"
         view_priority_to_dos    
-    elsif @menu_choice == "view_all_to_dos"
+    elsif @menu_choice == "View all To-Do's"
         view_all_to_dos 
-    elsif @menu_choice == "new_to_do"
+    elsif @menu_choice == "Make a new To-Do"
         new_to_do
-    elsif @menu_choice == "old_to_dos"
+    elsif @menu_choice == "View old To-Do's"
         old_to_dos
-    elsif @menu_choice == "teams"
+    elsif @menu_choice == "Teams"
         teams
-    elsif @menu_choice == "log_out"
+    elsif @menu_choice == "Log Out"
         welcome_section
     end
 end
 
-def teams
-    @teams_choice = @prompt.select("Teamwork makes the dreamwork. What do you want to do?", %w(
-        my_teams
-        join_team
-        create_team
-        back_to_menu
-    ))
+# def teams
+#     @teams_choice = @prompt.select("Teamwork makes the dreamwork. What do you want to do?", %w(
+#         my_teams
+#         join_team
+#         create_team
+#         back_to_menu
+#     ))
 
-    if @teams_choice == "my_teams"
+#     if @teams_choice == "my_teams"
+#         my_teams
+#     elsif @teams_choice == "join_team"
+#         join_team
+#     elsif @teams_choice == "create_team"
+#         create_team
+#     elsif @teams_choice == "back_to_menu"
+#         menu
+#     end
+# end
+
+def teams
+    @teams_choice = @prompt.select("Teamwork makes the dreamwork. What do you want to do?", [
+        "My teams",
+        "Join a team",
+        "Create team",
+        "Back to menu",
+    ])
+
+    if @teams_choice == "My teams"
         my_teams
-    elsif @teams_choice == "join_team"
+    elsif @teams_choice == "Join a team"
         join_team
-    elsif @teams_choice == "create_team"
+    elsif @teams_choice == "Create team"
         create_team
-    elsif @teams_choice == "back_to_menu"
+    elsif @teams_choice == "Back to menu"
         menu
     end
 end
 
+# def my_teams
+#     choices = @current_user.reload.all_team_names
+#     choices.push("back_to_teams")
+#     @my_teams_choice = @prompt.select("Choose the team you want to go to.", choices) #methods that show all teams
+#     if @my_teams_choice == "back_to_teams"
+#         teams
+#     elsif
+#         @current_team = Team.find_by(name: @my_teams_choice)
+#         current_team_menu
+#     end
+# end
+
 def my_teams
     choices = @current_user.reload.all_team_names
-    choices.push("back_to_teams")
+    choices.push("Back to teams")
     @my_teams_choice = @prompt.select("Choose the team you want to go to.", choices) #methods that show all teams
-    if @my_teams_choice == "back_to_teams"
+    if @my_teams_choice == "Back to teams"
         teams
     elsif
         @current_team = Team.find_by(name: @my_teams_choice)
@@ -157,22 +228,43 @@ def my_teams
     end
 end
 
+# def current_team_menu
+#     @current_team_menu_choice = @prompt.select("You are in #{@current_team.name}. What would you like to do?", %w(
+#         view_team_to_dos
+#         view_claimed_to_dos
+#         create_team_to_do
+#         back_to_my_teams
+#     ))
+#     if @current_team_menu_choice == "view_team_to_dos"
+#         view_team_to_dos
+#     elsif @current_team_menu_choice == "view_claimed_to_dos"
+#         view_claimed_to_dos
+#     elsif @current_team_menu_choice == "create_team_to_do"
+#         create_team_to_do
+#     elsif @current_team_menu_choice == "back_to_my_teams"
+#         my_teams
+#     elsif @current_team_menu_choice == "leave_team"
+#         leave_team
+#     end
+# end
+
 def current_team_menu
-    @current_team_menu_choice = @prompt.select("You are in #{@current_team.name}. What would you like to do?", %w(
+    @current_team_menu_choice = @prompt.select("You are in #{@current_team.name}. What would you like to do?", [
+        "View Team To-Do's",
+        "View Claimed To-Do's",
+        "Create Team To-Do",
+        "Back to my teams",
+        "Leave team"
+    ])
+    if @current_team_menu_choice == "View Team To-Do's"
         view_team_to_dos
+    elsif @current_team_menu_choice == "View Claimed To-Do's"
         view_claimed_to_dos
+    elsif @current_team_menu_choice == "Create Team To-Do"
         create_team_to_do
-        back_to_my_teams
-    ))
-    if @current_team_menu_choice == "view_team_to_dos"
-        view_team_to_dos
-    elsif @current_team_menu_choice == "view_claimed_to_dos"
-        view_claimed_to_dos
-    elsif @current_team_menu_choice == "create_team_to_do"
-        create_team_to_do
-    elsif @current_team_menu_choice == "back_to_my_teams"
+    elsif @current_team_menu_choice == "Back to my teams"
         my_teams
-    elsif @current_team_menu_choice == "leave_team"
+    elsif @current_team_menu_choice == "Leave team"
         leave_team
     end
 end
@@ -183,14 +275,35 @@ def leave_team
     my_teams
 end
 
+# def view_team_to_dos
+#     # binding.pry
+#     # choices = @current_user.reload.team_to_dos(@current_team)
+#     choices = @current_team.reload.team_to_dos_clean_string
+#     # binding.pry
+#     choices.push("back_to_team_menu")
+#     @view_team_to_dos_choice = @prompt.select("Select a to_do you want to claim", choices)
+#     if @view_team_to_dos_choice == "back_to_team_menu"
+#         current_team_menu
+#     else
+#         # binding.pry
+#         claimed_to_do_name = @view_team_to_dos_choice.split[0]
+#         @claimed_to_do = TeamToDo.find_by(name: claimed_to_do_name)
+#         @current_user.claim(@claimed_to_do)
+#         # @view_team_to_dos_choice.update(user_id: @current_user.id)
+#         # @view_team_to_dos_choice.colorize(:red)
+#         p "#{@claimed_to_do.name} has been added to claimed_to_dos"
+#         current_team_menu
+#     end
+# end
+
 def view_team_to_dos
     # binding.pry
     # choices = @current_user.reload.team_to_dos(@current_team)
     choices = @current_team.reload.team_to_dos_clean_string
     # binding.pry
-    choices.push("back_to_team_menu")
+    choices.push("Back to team menu")
     @view_team_to_dos_choice = @prompt.select("Select a to_do you want to claim", choices)
-    if @view_team_to_dos_choice == "back_to_team_menu"
+    if @view_team_to_dos_choice == "Back to team menu"
         current_team_menu
     else
         # binding.pry
@@ -199,16 +312,29 @@ def view_team_to_dos
         @current_user.claim(@claimed_to_do)
         # @view_team_to_dos_choice.update(user_id: @current_user.id)
         # @view_team_to_dos_choice.colorize(:red)
-        p "#{@claimed_to_do.name} has been added to claimed_to_dos"
+        p "#{@claimed_to_do.name} has been added to your claimed To-Do's!"
         current_team_menu
     end
 end
 
+
+# def view_claimed_to_dos
+#     choices = @current_user.claimed_to_do_names(@current_team)  #fix this
+#     choices.push("back_to_team_menu")
+#     view_chosen_to_dos_choice = @prompt.select("Here are your claimed to_dos", choices)
+#     if view_chosen_to_dos_choice == "back_to_team_menu"
+#         current_team_menu
+#     else
+#         @current_team_to_do = TeamToDo.find_by(name: view_chosen_to_dos_choice)
+#         current_team_to_do
+#     end
+# end
+
 def view_claimed_to_dos
     choices = @current_user.claimed_to_do_names(@current_team)  #fix this
-    choices.push("back_to_team_menu")
-    view_chosen_to_dos_choice = @prompt.select("Here are your claimed to_dos", choices)
-    if view_chosen_to_dos_choice == "back_to_team_menu"
+    choices.push("Back to team menu")
+    view_chosen_to_dos_choice = @prompt.select("Here are your claimed To-Do's!", choices)
+    if view_chosen_to_dos_choice == "Back to team menu"
         current_team_menu
     else
         @current_team_to_do = TeamToDo.find_by(name: view_chosen_to_dos_choice)
@@ -216,17 +342,32 @@ def view_claimed_to_dos
     end
 end
 
+# def current_team_to_do
+#     current_team_to_do_choice = @prompt.select("What would you like to do?", %w(
+#         back
+#         mark_complete
+#         unclaim
+#     ))
+#     if current_team_to_do_choice == "back"
+#         view_claimed_to_dos
+#     elsif current_team_to_do_choice == "mark_complete"
+#         mark_chosen_to_do_complete
+#     elsif current_team_to_do_choice == "unclaim"
+#         unclaim_chosen_to_do
+#     end
+# end
+
 def current_team_to_do
-    current_team_to_do_choice = @prompt.select("What would you like to do?", %w(
-        back
-        mark_complete
-        unclaim
-    ))
-    if current_team_to_do_choice == "back"
+    current_team_to_do_choice = @prompt.select("What would you like to do?", [
+        "Ahhh! Go back!",
+        "Mark Complete!",
+        "Unclaim"
+    ])
+    if current_team_to_do_choice == "Ahhh! Go back!"
         view_claimed_to_dos
-    elsif current_team_to_do_choice == "mark_complete"
+    elsif current_team_to_do_choice == "Mark Complete!"
         mark_chosen_to_do_complete
-    elsif current_team_to_do_choice == "unclaim"
+    elsif current_team_to_do_choice == "Unclaim"
         unclaim_chosen_to_do
     end
 end
@@ -318,8 +459,16 @@ def view_all_to_dos
     select_to_do 
 end
 
+# def add_back_to_menu_and_select_choice(array)
+#     back_to_menu = "back_to_menu"
+#     array << back_to_menu 
+#     @selected_choice = @prompt.select("Your To-Dos", array)
+#     # binding.pry
+#     # 0
+# end
+
 def add_back_to_menu_and_select_choice(array)
-    back_to_menu = "back_to_menu"
+    back_to_menu = "Back to menu"
     array << back_to_menu 
     @selected_choice = @prompt.select("Your To-Dos", array)
     # binding.pry
@@ -332,26 +481,51 @@ def view_priority_to_dos
     select_to_do
 end
 
+# def old_to_dos
+#     @old_to_do_choice = @prompt.select("What would you like to do?", %w(
+#         view_old_to_dos 
+#         delete_old_to_dos 
+#         back_to_menu
+#         ))
+#     old_to_do_choice
+# end
+
+# def old_to_do_choice
+#     if @old_to_do_choice == "view_old_to_dos"
+#         view_old_to_dos 
+#     elsif @old_to_do_choice == "delete_old_to_dos"
+#         @sure_of_deletion = @prompt.yes?("Are you sure you want to delete all old To-Dos?")
+#         if @sure_of_deletion == true 
+#             delete_old_to_dos 
+#         else
+#             old_to_dos
+#         end
+#     elsif @old_to_do_choice == "back_to_menu"
+#         menu 
+#     end         
+# end
+
+
 def old_to_dos
-    @old_to_do_choice = @prompt.select("What would you like to do?", %w(
-        view_old_to_dos 
-        delete_old_to_dos 
-        back_to_menu
-        ))
+    @old_to_do_choice = @prompt.select("What would you like to do?", [
+        "View old To-Do's",
+        "Delete old To-Do's",
+        "Back to menu"
+    ])
     old_to_do_choice
 end
 
 def old_to_do_choice
-    if @old_to_do_choice == "view_old_to_dos"
+    if @old_to_do_choice == "View old To-Do's"
         view_old_to_dos 
-    elsif @old_to_do_choice == "delete_old_to_dos"
+    elsif @old_to_do_choice == "Delete old To-Do's"
         @sure_of_deletion = @prompt.yes?("Are you sure you want to delete all old To-Dos?")
         if @sure_of_deletion == true 
             delete_old_to_dos 
         else
             old_to_dos
         end
-    elsif @old_to_do_choice == "back_to_menu"
+    elsif @old_to_do_choice == "Back to menu"
         menu 
     end         
 end
@@ -368,48 +542,93 @@ def view_old_to_dos
     select_old_to_do
 end
 
+# def select_old_to_do
+#     if @selected_choice == "back_to_menu"
+#         menu
+#     else
+#         get_selected_to_do 
+#         @to_do_choice = @prompt.select("What would you like to do with this To-Do?", %w(
+#             delete_to_do
+#             mark_incomplete
+#         ))
+#         if @to_do_choice == "delete_to_do"
+#             delete_to_do_transfer
+#         elsif @to_do_choice == "mark_incomplete"
+#             mark_incomplete 
+#         end
+#     end
+# end
+
 def select_old_to_do
-    if @selected_choice == "back_to_menu"
+    if @selected_choice == "Back to menu"
         menu
     else
         get_selected_to_do 
-        @to_do_choice = @prompt.select("What would you like to do with this To-Do?", %w(
-            delete_to_do
-            mark_incomplete
-        ))
-        if @to_do_choice == "delete_to_do"
+        @to_do_choice = @prompt.select("What would you like to do with this To-Do?", [
+            "Delete To-Do",
+            "Mark Incomplete"
+        ])
+        if @to_do_choice == "Delete To-Do"
             delete_to_do_transfer
-        elsif @to_do_choice == "mark_incomplete"
+        elsif @to_do_choice == "Mark Incomplete"
             mark_incomplete 
         end
     end
 end
 
+# def get_selected_to_do
+#     selected_choice_array = @selected_choice.split(/[(, ):]+/)
+#     selected_to_do_id = selected_choice_array[12]
+#     @selected_to_do = ToDo.find(selected_to_do_id)
+# end
 
 def get_selected_to_do
-    selected_choice_array = @selected_choice.split(/[(, ):]+/)
-    selected_to_do_id = selected_choice_array[12]
+    selected_choice_array = @selected_choice.split(" |")
+    selected_to_do_id = selected_choice_array[0]
     @selected_to_do = ToDo.find(selected_to_do_id)
 end
 
+# def select_to_do
+#     if @selected_choice == "back_to_menu"
+#         menu
+#     else
+#         get_selected_to_do 
+#         @to_do_choice = @prompt.select("What would you like to do with this To-Do?", %w(
+#             mark_complete
+#             edit_to_do
+#             delete_to_do
+#             back_to_menu 
+#         ))
+#         if @to_do_choice == "mark_complete"
+#             mark_complete
+#         elsif @to_do_choice == "edit_to_do"
+#             edit_to_do
+#         elsif @to_do_choice == "delete_to_do"
+#             delete_to_do_transfer 
+#         elsif @to_do_choice == "back_to_menu"
+#             menu 
+#         end
+#     end
+# end
+
 def select_to_do
-    if @selected_choice == "back_to_menu"
+    if @selected_choice == "Back to menu"
         menu
     else
         get_selected_to_do 
-        @to_do_choice = @prompt.select("What would you like to do with this To-Do?", %w(
+        @to_do_choice = @prompt.select("What would you like to do with this To-Do?", [
+            "Mark Complete!",
+            "Edit To-Do",
+            "Delete To-Do",
+            "Back to menu"
+        ])
+        if @to_do_choice == "Mark Complete!"
             mark_complete
+        elsif @to_do_choice == "Edit To-Do"
             edit_to_do
-            delete_to_do
-            back_to_menu 
-        ))
-        if @to_do_choice == "mark_complete"
-            mark_complete
-        elsif @to_do_choice == "edit_to_do"
-            edit_to_do
-        elsif @to_do_choice == "delete_to_do"
+        elsif @to_do_choice == "Delete To-Do"
             delete_to_do_transfer 
-        elsif @to_do_choice == "back_to_menu"
+        elsif @to_do_choice == "Back to menu"
             menu 
         end
     end
@@ -463,22 +682,74 @@ def further_edit_to_do
     end
 end
 
+# def new_to_do
+#     p "Okay, let's make a new To-Do!"
+#     @user_category = @prompt.select("Please choose or make a new category for your To-Do.", Task.task_categories.push("make_new_category"))
+#     if @user_category == "make_new_category"
+#         @user_category = @prompt.ask("What do you want to name this category (think subject, class, or type of activity; additionally please input using snake_case)?")
+#         if @user_category.split(' ').length > 1
+#             p "Please input the category correctly, let's try this all again!"
+#             new_to_do 
+#         end
+#     end
+#         find_category
+# end
+
+# def new_to_do
+#     p "Okay, let's make a new To-Do!"
+#     @user_category = @prompt.select("Please choose or make a new category for your To-Do.", Task.task_categories.push("Make a new category!"))
+#     if @user_category == "Make a new category!"
+#         @user_category = @prompt.ask("What do you want to name this category (think subject, class, or type of activity; additionally please input using snake_case)?")
+#         if @user_category.split(' ').length > 1
+#             p "Please input the category correctly, let's try this all again!"
+#             new_to_do 
+#         end
+#     end
+#         find_category
+# end
+
 def new_to_do
     p "Okay, let's make a new To-Do!"
-    @user_category = @prompt.select("Please choose or make a new category for your To-Do.", Task.task_categories.push("make_new_category"))
-    if @user_category == "make_new_category"
-        @user_category = @prompt.ask("What do you want to name this category (think subject, class, or type of activity; additionally please input using snake_case)?")
-        if @user_category.split(' ').length > 1
-            p "Please input the category correctly, let's try this all again!"
-            new_to_do 
-        end
+    @user_category = @prompt.select("Please choose or make a new category for your To-Do.", Task.task_categories.push("Make a new category!"))
+    if @user_category == "Make a new category!"
+        @user_category = @prompt.ask("What do you want to name this category (think subject, class, or type of activity)?")
     end
         find_category
 end
 
+
+# def task_names_plus_make_new
+#     array = Task.find_names_by_category(@user_category)
+#     make_new_name = "No!_make_new_name"
+#     array << make_new_name
+#     array 
+# end
+
+# def find_category
+#     # Applies to situation in which we chose an option from drop-down task menu
+#     if Task.find_by(category: @user_category)
+#         @selected_name = @prompt.select("Do you recognize any of these assignment names?", task_names_plus_make_new)
+#         if @selected_name == "No!_make_new_name"
+#             make_task_name 
+#         else
+#             @selected_task = Task.find_by(name: @selected_name, category: @user_category)
+#             @confirm_task = @prompt.yes?("Is this: (#{@selected_task.clean_look}) your task?")
+#             if @confirm_task == true 
+#                 priority_level 
+#             else
+#                 due_date_year 
+#             end
+#         end
+#     else
+#         make_task_name 
+#     end
+             
+
+# end
+
 def task_names_plus_make_new
     array = Task.find_names_by_category(@user_category)
-    make_new_name = "No!_make_new_name"
+    make_new_name = "No! Make a new name!"
     array << make_new_name
     array 
 end
@@ -487,7 +758,7 @@ def find_category
     # Applies to situation in which we chose an option from drop-down task menu
     if Task.find_by(category: @user_category)
         @selected_name = @prompt.select("Do you recognize any of these assignment names?", task_names_plus_make_new)
-        if @selected_name == "No!_make_new_name"
+        if @selected_name == "No! Make a new name!"
             make_task_name 
         else
             @selected_task = Task.find_by(name: @selected_name, category: @user_category)
@@ -524,12 +795,17 @@ def make_to_do
     menu 
 end
 # Currently sending myself here without a name 
+# def make_task_name
+#     @selected_name = @prompt.ask("What do you want to name this task (please input in snake_case)?")
+#         if @selected_name.split(' ').length > 1
+#             p "Please input a task name in snake_case!"
+#             make_task_name
+#         end
+#     due_date_year 
+# end
+
 def make_task_name
-    @selected_name = @prompt.ask("What do you want to name this task (please input in snake_case)?")
-        if @selected_name.split(' ').length > 1
-            p "Please input a task name in snake_case!"
-            make_task_name
-        end
+    @selected_name = @prompt.ask("What do you want to name this task?")
     due_date_year 
 end
 

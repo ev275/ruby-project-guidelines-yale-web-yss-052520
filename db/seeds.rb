@@ -7,7 +7,6 @@ ToDo.destroy_all
 enrique = User.create(name: "Enrique Valencia", username: "ev275", password: "donkey", college: "Trumbull", age: 19)
 justin = User.create(name: "Justin James", username: "justin1234", password: "rocket", college: "Davenport", age: 21)
 
-
 # we could think about raising an error if assigned date is after due date
  task_1 = Task.create(name: "Math_p_set_11", category: "Math", due_date: Date.new(2020,6,19), assigned_date: Date.new(2020,6,8))
  task_2 = Task.create(name: "Econ_p_set_11", category: "Economics", due_date: Date.new(2020,6,17), assigned_date: Date.new(2020,6,1))
