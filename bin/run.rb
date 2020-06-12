@@ -42,9 +42,10 @@ def log_in_section
         returning_user_log_in
 
     elsif @user_type == "New User"
-        new_user_sign_up_info
+        new_user_sign_up_info 
     end
 end
+
 
 def password_trial
     p "Type in your password."
@@ -147,7 +148,7 @@ def menu
         "Make a new To-Do",
         "View old To-Do's",
         "Teams",
-        "Log Out"
+        "Log Out",
     ])
 
 
@@ -397,11 +398,23 @@ def create_team_to_do
     current_team_menu
 end
 
+# def join_team
+#     choices = @current_user.reload.unjoined_team_names
+#     choices.push("back_to_teams")
+#     join_team_choice = @prompt.select("Which team would you like to join?", choices)
+#     if join_team_choice == "back_to_teams"
+#         teams
+#     else
+#         @current_team = Team.find_by(name: join_team_choice)
+#         join_team_sign_in
+#     end
+# end
+
 def join_team
     choices = @current_user.reload.unjoined_team_names
-    choices.push("back_to_teams")
+    choices.push("Back to teams")
     join_team_choice = @prompt.select("Which team would you like to join?", choices)
-    if join_team_choice == "back_to_teams"
+    if join_team_choice == "Back to teams"
         teams
     else
         @current_team = Team.find_by(name: join_team_choice)
@@ -413,7 +426,7 @@ def join_team_sign_in
     typed_in_password = @prompt.mask("Type in the password for #{@current_team.name}")
     if typed_in_password == @current_team.password
         TeamUser.create(user_id: @current_user.id, team_id: @current_team.id)
-        p "#{@current_team.name} has been added to my_teams"
+        p "#{@current_team.name} has been added to your teams!"
         teams
     else
         p "Sorry, wrong password. Try again."
@@ -860,7 +873,6 @@ def make_new_task
     priority_level 
 end
 
-    
 system "clear"
 start
 
@@ -900,4 +912,4 @@ start
 #Team_to_do class
 
 
-puts "HELLO WORLD"
+puts "To-Do.it"
