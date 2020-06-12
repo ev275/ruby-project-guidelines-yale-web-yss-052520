@@ -11,7 +11,10 @@ require_relative '../config/environment'
 # end
 
 def start
-    # render_ascii_art
+    title = Artii::Base.new
+    title =  title.asciify ('ToDo.it')
+    puts title.colorize(:blue)
+    
     welcome_section
 end
 
